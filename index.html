@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>Crypto Dashboard</h1>
+      <div class="top-actions">
+        <button id="refreshBtn">Refresh Prices</button>
+        <button id="connectWallet">Connect Wallet</button>
+      </div>
+    </header>
+
+    <section class="hero-grid">
+      <div class="card wallet-card">
+        <h2>Wallet</h2>
+        <p id="walletAddress">Wallet not connected</p>
+        <p id="balance">Balance: --</p>
+      </div>
+
+      <div class="card market-card">
+        <h2>Market Overview</h2>
+        <p id="lastUpdated">Last updated: --</p>
+        <p id="marketStatus">Loading market data...</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-head">
+        <h2>Top Crypto Prices</h2>
+      </div>
+
+      <div class="crypto-grid">
+        <div class="coin-box">
+          <div>
+            <h3>₿ Bitcoin</h3>
+            <p>BTC</p>
+          </div>
+          <div class="price-wrap">
+            <span id="btcPrice">Loading...</span>
+          </div>
+        </div>
+
+        <div class="coin-box">
+          <div>
+            <h3>Ξ Ethereum</h3>
+            <p>ETH</p>
+          </div>
+          <div class="price-wrap">
+            <span id="ethPrice">Loading...</span>
+          </div>
+        </div>
+
+        <div class="coin-box">
+          <div>
+            <h3>₮ Tether</h3>
+            <p>USDT</p>
+          </div>
+          <div class="price-wrap">
+            <span id="usdtPrice">Loading...</span>
+          </div>
+        </div>
+
+        <div class="coin-box">
+          <div>
+            <h3>◎ BNB</h3>
+            <p>BNB</p>
+          </div>
+          <div class="price-wrap">
+            <span id="bnbPrice">Loading...</span>
+          </div>
+        </div>
+
+        <div class="coin-box">
+          <div>
+            <h3>✕ XRP</h3>
+            <p>XRP</p>
+          </div>
+          <div class="price-wrap">
+            <span id="xrpPrice">Loading...</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard-grid">
+      <div class="card chart-card">
+        <div class="section-head">
+          <h2>Bitcoin 7-Day Chart</h2>
+        </div>
+        <canvas id="btcChart"></canvas>
+      </div>
+
+      <div class="card portfolio-card">
+        <div class="section-head">
+          <h2>Portfolio Tracker</h2>
+        </div>
+
+        <div class="form-group">
+          <label for="btcHoldings">Bitcoin Holdings (BTC)</label>
+          <input type="number" id="btcHoldings" placeholder="e.g. 0.5" step="any" />
+        </div>
+
+        <div class="form-group">
+          <label for="ethHoldings">Ethereum Holdings (ETH)</label>
+          <input type="number" id="ethHoldings" placeholder="e.g. 2" step="any" />
+        </div>
+
+        <div class="form-group">
+          <label for="usdtHoldings">Tether Holdings (USDT)</label>
+          <input type="number" id="usdtHoldings" placeholder="e.g. 1000" step="any" />
+        </div>
+
+        <div class="form-group">
+          <label for="bnbHoldings">BNB Holdings (BNB)</label>
+          <input type="number" id="bnbHoldings" placeholder="e.g. 3" step="any" />
+        </div>
+
+        <div class="form-group">
+          <label for="xrpHoldings">XRP Holdings (XRP)</label>
+          <input type="number" id="xrpHoldings" placeholder="e.g. 250" step="any" />
+        </div>
+
+        <div class="portfolio-actions">
+          <button id="calculateBtn">Calculate Portfolio</button>
+          <button id="saveBtn" class="secondary-btn">Save Holdings</button>
+        </div>
+
+        <div class="portfolio-results">
+          <p id="btcValue">BTC Value: $0</p>
+          <p id="ethValue">ETH Value: $0</p>
+          <p id="usdtValue">USDT Value: $0</p>
+          <p id="bnbValue">BNB Value: $0</p>
+          <p id="xrpValue">XRP Value: $0</p>
+          <h3 id="totalValue">Total Portfolio Value: $0</h3>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
