@@ -157,21 +157,34 @@ async function loadChart(){
         datasets:[{
           label:"Bitcoin Price",
           data:prices,
-          borderColor:"#f59e0b",
-          backgroundColor:"rgba(245,158,11,0.2)",
-          fill:true
+          borderColor:"#4ade80",
+          borderWidth:1.5,
+          backgroundColor:"rgba(74,222,128,0.06)",
+          fill:true,
+          pointRadius:0,
+          tension:0.4
         }]
       },
       options:{
         responsive:true,
         plugins:{
-          legend:{
-            labels:{color:"white"}
-          }
+          legend:{display:false}
         },
         scales:{
-          x:{ticks:{color:"white"}},
-          y:{ticks:{color:"white"}}
+          x:{
+            ticks:{color:"#4a4a44", font:{family:"'DM Mono', monospace", size:10}},
+            grid:{color:"rgba(255,255,255,0.04)"},
+            border:{display:false}
+          },
+          y:{
+            ticks:{
+              color:"#4a4a44",
+              font:{family:"'DM Mono', monospace", size:10},
+              callback: v => "$" + (v/1000).toFixed(0) + "k"
+            },
+            grid:{color:"rgba(255,255,255,0.04)"},
+            border:{display:false}
+          }
         }
       }
     });
