@@ -207,3 +207,57 @@ refreshBtn.addEventListener("click",getPrices);
 getPrices();
 loadChart();
 setInterval(getPrices,15000);
+
+// PORTFOLIO CALCULATE
+function calculatePortfolio(){
+  const btc = parseFloat(document.getElementById("btcHoldings").value) || 0;
+  const eth = parseFloat(document.getElementById("ethHoldings").value) || 0;
+  const usdt = parseFloat(document.getElementById("usdtHoldings").value) || 0;
+  const bnb = parseFloat(document.getElementById("bnbHoldings").value) || 0;
+  const xrp = parseFloat(document.getElementById("xrpHoldings").value) || 0;
+
+  const btcVal = btc * prices.bitcoin;
+  const ethVal = eth * prices.ethereum;
+  const usdtVal = usdt * prices.tether;
+  const bnbVal = bnb * prices.binancecoin;
+  const xrpVal = xrp * prices.ripple;
+  const total = btcVal + ethVal + usdtVal + bnbVal + xrpVal;
+
+  document.getElementById("btcValue").innerText = "BTC Value: $" + btcVal.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById("ethValue").innerText = "ETH Value: $" + ethVal.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById("usdtValue").innerText = "USDT Value: $" + usdtVal.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById("bnbValue").innerText = "BNB Value: $" + bnbVal.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById("xrpValue").innerText = "XRP Value: $" + xrpVal.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  document.getElementById("totalValue").innerText = "Total Portfolio Value: $" + total.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+// SAVE HOLDINGS
+function saveHoldings(){
+  const holdings = {
+    btc: document.getElementById("btcHoldings").value,
+    eth: document.getElementById("ethHoldings").value,
+    usdt: document.getElementById("usdtHoldings").value,
+    bnb: document.getElementById("bnbHoldings").value,
+    xrp: document.getElementById("xrpHoldings").value,
+  };
+  localStorage.setItem("cryptoHoldings", JSON.stringify(holdings));
+  const btn = document.getElementById("saveBtn");
+  btn.innerText = "Saved!";
+  setTimeout(() => btn.innerText = "Save Holdings", 2000);
+}
+
+// LOAD SAVED HOLDINGS ON START
+function loadHoldings(){
+  const saved = localStorage.getItem("cryptoHoldings");
+  if(!saved) return;
+  const h = JSON.parse(saved);
+  document.getElementById("btcHoldings").value = h.btc || "";
+  document.getElementById("ethHoldings").value = h.eth || "";
+  document.getElementById("usdtHoldings").value = h.usdt || "";
+  document.getElementById("bnbHoldings").value = h.bnb || "";
+  document.getElementById("xrpHoldings").value = h.xrp || "";
+}
+
+document.getElementById("calculateBtn").addEventListener("click", calculatePortfolio);
+document.getElementById("saveBtn").addEventListener("click", saveHoldings);
+loadHoldings();
